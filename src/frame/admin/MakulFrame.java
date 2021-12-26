@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Makul;
+import util.JamDigital;
 
 /**
  *
@@ -152,6 +153,7 @@ public class MakulFrame extends javax.swing.JFrame {
         initComponents();
         this.setBackground(new Color(0,0,0,0));
         this.setLocationRelativeTo(null);
+        JamDigital.getJam(lbl_jam);
         lebarKolom();
         resetTable("");
     }
@@ -186,6 +188,7 @@ public class MakulFrame extends javax.swing.JFrame {
         bHapus = new javax.swing.JButton();
         bBatal = new javax.swing.JButton();
         bKode = new javax.swing.JButton();
+        lbl_jam = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -352,6 +355,11 @@ public class MakulFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(bKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 221, 110, 30));
+
+        lbl_jam.setFont(new java.awt.Font("Microsoft YaHei", 1, 20)); // NOI18N
+        lbl_jam.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_jam.setText("Jam");
+        getContentPane().add(lbl_jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\form_makul.png")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 1160, -1));
@@ -562,6 +570,7 @@ public class MakulFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_jam;
     private javax.swing.JTable tMakul;
     // End of variables declaration//GEN-END:variables
 

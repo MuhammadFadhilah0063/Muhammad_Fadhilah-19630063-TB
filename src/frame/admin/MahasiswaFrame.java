@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -39,6 +40,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Mhs;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import util.JamDigital;
 
 /**
  *
@@ -257,6 +262,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         lebarKolom();
         rbLaki.setSelected(true);
+        JamDigital.getJam(lbl_jam);
         resetTable("");
     }
 
@@ -299,6 +305,8 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         bHapus = new javax.swing.JButton();
         bUbah = new javax.swing.JButton();
         bSimpan = new javax.swing.JButton();
+        bCetak = new javax.swing.JButton();
+        lbl_jam = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -360,7 +368,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
 
         cbProgStudi.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        cbProgStudi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teknik Informatika" }));
+        cbProgStudi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S1 Teknik Informatika" }));
         cbProgStudi.setPreferredSize(new java.awt.Dimension(64, 18));
         getContentPane().add(cbProgStudi, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 300, 30));
         getContentPane().add(dpTglLahir, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 280, 300, -1));
@@ -498,6 +506,25 @@ public class MahasiswaFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(bSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 180, 40));
+
+        bCetak.setBackground(new java.awt.Color(198, 210, 211));
+        bCetak.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        bCetak.setForeground(new java.awt.Color(59, 59, 59));
+        bCetak.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\icon_cetak.png")); // NOI18N
+        bCetak.setText("Cetak");
+        bCetak.setToolTipText("");
+        bCetak.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(171, 176, 174), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(198, 210, 211), 2)));
+        bCetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCetakActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 650, 100, 30));
+
+        lbl_jam.setFont(new java.awt.Font("Microsoft YaHei", 1, 20)); // NOI18N
+        lbl_jam.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_jam.setText("Jam");
+        getContentPane().add(lbl_jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\form_mhs.png")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
@@ -692,6 +719,19 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_bLogoutMouseClicked
 
+    private void bCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCetakActionPerformed
+        // TODO add your handling code here:
+        try{
+            con = Koneksi.getKoneksi();
+            HashMap param = new HashMap();
+
+            JasperPrint JPrint = JasperFillManager.fillReport(getClass().getResourceAsStream("../../report/mhsReport.jasper"), param, con);
+            JasperViewer.viewReport(JPrint, false);
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_bCetakActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -730,6 +770,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bBatal;
+    private javax.swing.JButton bCetak;
     private javax.swing.JLabel bExit;
     private javax.swing.JButton bHapus;
     private javax.swing.JLabel bKembali;
@@ -757,6 +798,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lFoto;
+    private javax.swing.JLabel lbl_jam;
     private javax.swing.JRadioButton rbLaki;
     private javax.swing.JRadioButton rbPerempuan;
     private javax.swing.JTable tMhs;

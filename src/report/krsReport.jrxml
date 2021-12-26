@@ -208,7 +208,7 @@ krs.id_mhs = $P{idMhs};]]>
 				<text><![CDATA[Program Studi  :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="431" y="6" width="106" height="20" uuid="6dce46fc-2c5c-48ab-aa93-5d965add4e49"/>
+				<reportElement x="431" y="6" width="124" height="20" uuid="6dce46fc-2c5c-48ab-aa93-5d965add4e49"/>
 				<textElement>
 					<font fontName="Calibri" size="12" isBold="true"/>
 				</textElement>

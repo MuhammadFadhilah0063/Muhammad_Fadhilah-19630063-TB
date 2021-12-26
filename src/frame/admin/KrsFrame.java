@@ -34,6 +34,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import util.JamDigital;
 
 /**
  *
@@ -420,6 +421,7 @@ public class KrsFrame extends javax.swing.JFrame {
         initComponents();
         this.setBackground(new Color(0,0,0,0));
         this.setLocationRelativeTo(null);
+        JamDigital.getJam(lbl_jam);
         lebarKolom();
         setTahunAjar();
         setTableList(); 
@@ -470,6 +472,7 @@ public class KrsFrame extends javax.swing.JFrame {
         bBatal = new javax.swing.JButton();
         bCetak = new javax.swing.JButton();
         bNpm = new javax.swing.JButton();
+        lbl_jam = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -714,6 +717,11 @@ public class KrsFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(bNpm, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 171, 140, 30));
+
+        lbl_jam.setFont(new java.awt.Font("Microsoft YaHei", 1, 20)); // NOI18N
+        lbl_jam.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_jam.setText("Jam");
+        getContentPane().add(lbl_jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\form_krs.png")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
@@ -961,6 +969,7 @@ public class KrsFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblDaftar;
+    private javax.swing.JLabel lbl_jam;
     private javax.swing.JTable tKrsMhs;
     private javax.swing.JTable tList;
     // End of variables declaration//GEN-END:variables

@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import model.Kelas;
+import util.JamDigital;
 
 /**
  *
@@ -133,6 +134,7 @@ public class KelasFrame extends javax.swing.JFrame {
         this.setBackground(new Color(0,0,0,0));
         this.setLocationRelativeTo(null);
         lebarKolom();
+        JamDigital.getJam(lbl_jam);
         resetTable("");
     }
 
@@ -164,6 +166,7 @@ public class KelasFrame extends javax.swing.JFrame {
         bBatal = new javax.swing.JButton();
         bKode = new javax.swing.JButton();
         bSimpan = new javax.swing.JButton();
+        lbl_jam = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -328,6 +331,11 @@ public class KelasFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(bSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 180, 40));
+
+        lbl_jam.setFont(new java.awt.Font("Microsoft YaHei", 1, 20)); // NOI18N
+        lbl_jam.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_jam.setText("Jam");
+        getContentPane().add(lbl_jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\form_kelas.png")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
@@ -532,6 +540,7 @@ public class KelasFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_jam;
     private javax.swing.JTable tKelas;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Jadwal;
 import model.Mhs;
+import util.JamDigital;
 
 /**
  *
@@ -115,6 +116,7 @@ public class JadwalMhsFrame extends javax.swing.JFrame {
         this.setBackground(new Color(0,0,0,0));
         this.setLocationRelativeTo(null);
         lebarKolom();
+        JamDigital.getJam(lbl_jam);
         resetTable("");
     }
     
@@ -124,6 +126,7 @@ public class JadwalMhsFrame extends javax.swing.JFrame {
         this.setBackground(new Color(0,0,0,0));
         this.setLocationRelativeTo(null);
         lebarKolom();
+        JamDigital.getJam(lbl_jam);
         resetTable("");
     }
     
@@ -142,6 +145,7 @@ public class JadwalMhsFrame extends javax.swing.JFrame {
         bExit = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tJadwal = new javax.swing.JTable();
+        lbl_jam = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -186,6 +190,11 @@ public class JadwalMhsFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tJadwal);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 1030, 460));
+
+        lbl_jam.setFont(new java.awt.Font("Microsoft YaHei", 1, 20)); // NOI18N
+        lbl_jam.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_jam.setText("Jam");
+        getContentPane().add(lbl_jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\form_lihat_jadwal.png")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
@@ -266,6 +275,7 @@ public class JadwalMhsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel bLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_jam;
     private javax.swing.JTable tJadwal;
     // End of variables declaration//GEN-END:variables
 }
