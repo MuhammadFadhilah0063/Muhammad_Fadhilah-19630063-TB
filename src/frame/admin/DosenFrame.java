@@ -307,7 +307,7 @@ public class DosenFrame extends javax.swing.JFrame {
 
     private void bExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bExitMouseClicked
         // TODO add your handling code here:
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_bExitMouseClicked
 
     private void tDosenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tDosenMouseClicked
@@ -350,7 +350,7 @@ public class DosenFrame extends javax.swing.JFrame {
     private void bSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSimpanActionPerformed
         // TODO add your handling code here:
         dosen = new Dosen();
-        dosen.setNip(eNama.getText());
+        dosen.setNip(eNip.getText());
         dosen.setNama(eNama.getText());
         dosen.setTelepon(eHp.getText());
         dosen.setAlamat(eAlamat.getText());

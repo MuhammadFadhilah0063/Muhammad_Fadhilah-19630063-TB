@@ -173,6 +173,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         eNama.requestFocus();
         lFoto.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\img\\800px-No-Image-Placeholder.svg.png"));
         bNpm.setEnabled(true);
+        bSimpan.setEnabled(true);
     }
     
     public Date getFormattedDate(String tanggal) {
@@ -534,7 +535,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
 
     private void bExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bExitMouseClicked
         // TODO add your handling code here:
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_bExitMouseClicked
 
     private void bPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPilihActionPerformed
@@ -586,6 +587,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
   
         eNama.requestFocus();
         bNpm.setEnabled(false);
+        bSimpan.setEnabled(false);
     }//GEN-LAST:event_tMhsMouseClicked
 
     private void bNpmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNpmActionPerformed

@@ -366,15 +366,15 @@ public class KrsFrame extends javax.swing.JFrame {
         column = tKrsMhs.getColumnModel().getColumn(2); 
         column.setPreferredWidth(50);
         column = tKrsMhs.getColumnModel().getColumn(3); 
-        column.setPreferredWidth(200);
+        column.setPreferredWidth(180);
         column = tKrsMhs.getColumnModel().getColumn(4); 
-        column.setPreferredWidth(85);
+        column.setPreferredWidth(105);
         column = tKrsMhs.getColumnModel().getColumn(5); 
         column.setPreferredWidth(45);
         column = tKrsMhs.getColumnModel().getColumn(6); 
-        column.setPreferredWidth(240);
+        column.setPreferredWidth(220);
         column = tKrsMhs.getColumnModel().getColumn(7); 
-        column.setPreferredWidth(160);
+        column.setPreferredWidth(180);
         column = tKrsMhs.getColumnModel().getColumn(8); 
         column.setPreferredWidth(10);
         column = tKrsMhs.getColumnModel().getColumn(9); 
@@ -731,7 +731,7 @@ public class KrsFrame extends javax.swing.JFrame {
 
     private void bExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bExitMouseClicked
         // TODO add your handling code here:
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_bExitMouseClicked
 
     private void bKembaliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bKembaliMouseClicked

@@ -324,11 +324,11 @@ public class KrsMhsFrame extends javax.swing.JFrame {
         column = tKrsMhs.getColumnModel().getColumn(3); 
         column.setPreferredWidth(200);
         column = tKrsMhs.getColumnModel().getColumn(4); 
-        column.setPreferredWidth(85);
+        column.setPreferredWidth(105);
         column = tKrsMhs.getColumnModel().getColumn(5); 
         column.setPreferredWidth(45);
         column = tKrsMhs.getColumnModel().getColumn(6); 
-        column.setPreferredWidth(240);
+        column.setPreferredWidth(220);
         column = tKrsMhs.getColumnModel().getColumn(7); 
         column.setPreferredWidth(160);
         column = tKrsMhs.getColumnModel().getColumn(8); 
@@ -522,7 +522,7 @@ public class KrsMhsFrame extends javax.swing.JFrame {
                 bCetakActionPerformed(evt);
             }
         });
-        getContentPane().add(bCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 780, 100, 30));
+        getContentPane().add(bCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(1387, 643, 100, 30));
 
         tList.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         tList.setModel(new javax.swing.table.DefaultTableModel(
@@ -574,7 +574,7 @@ public class KrsMhsFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tKrsMhs);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 670, 1430, 150));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 680, 1430, 140));
 
         eNama.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         eNama.setEnabled(false);
@@ -630,7 +630,7 @@ public class KrsMhsFrame extends javax.swing.JFrame {
 
     private void bExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bExitMouseClicked
         // TODO add your handling code here:
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_bExitMouseClicked
 
     private void bKembaliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bKembaliMouseClicked
