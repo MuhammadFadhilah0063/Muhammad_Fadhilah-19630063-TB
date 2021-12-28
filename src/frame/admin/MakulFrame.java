@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package frame.admin;
 
@@ -21,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Makul;
+import util.FrameSetting;
 import util.JamDigital;
 
 /**
@@ -32,13 +28,18 @@ public class MakulFrame extends javax.swing.JFrame {
     private Makul makul;
     private Connection con;
     private PreparedStatement ps;
+    private ResultSet rs;
+    private Statement st;
     private String qry;
 
+    /**
+     * Method untuk mengambil seluruh makul
+     * @param keyword
+     * @return makulList
+     */
     public ArrayList<Makul> getMakulList(String keyword) {
         ArrayList<Makul> makulList = new ArrayList<>();
         con = Koneksi.getKoneksi();
-        ResultSet rs;
-        Statement st;
         qry = "SELECT * FROM makul" + keyword;
         
         try {
@@ -53,11 +54,14 @@ public class MakulFrame extends javax.swing.JFrame {
                 makulList.add(makul);
             }
         } catch (SQLException | NullPointerException ex) {
-            System.err.println("Koneksi Null Gagal");
+            System.err.println("Error getMakulList(): " + ex.getMessage());
         }
         return makulList;
     }
     
+    /**
+     * Method untuk menampilkan data makul ke tabel makul
+     */
     public void selectMakul(String keyword) {
         ArrayList<Makul> list = getMakulList(keyword);
         DefaultTableModel model = (DefaultTableModel) tMakul.getModel();
@@ -74,12 +78,18 @@ public class MakulFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Method untuk mengatur ulang / refresh tabel makul
+     */
     public final void resetTable(String keyword) {
         DefaultTableModel model = (DefaultTableModel) tMakul.getModel();
         model.setRowCount(0);
         selectMakul(keyword);
     }
     
+    /**
+     * Method untuk membersihkan field
+     */
     public void clearField() {
         eKdMakul.setText("");
         eMakul.setText("");
@@ -89,6 +99,10 @@ public class MakulFrame extends javax.swing.JFrame {
         eMakul.requestFocus();
     }
     
+    /**
+     * Method untuk membuat 2 huruf random
+     * @return twoChar
+     */
     public String randomChar() {
         char[] charValue = new char[2];
         String twoChar;
@@ -105,6 +119,10 @@ public class MakulFrame extends javax.swing.JFrame {
         return twoChar;
     }
     
+    /**
+     * Method untuk membuat kode makul
+     * @return kode
+     */
     public String makeKode() {
         String kode = null;
         String lastKode = null;
@@ -112,18 +130,18 @@ public class MakulFrame extends javax.swing.JFrame {
         
         kode = "TI" + kodeChar + "01";
         try {
-            Connection con = Koneksi.getKoneksi();
-            String query = "SELECT kode_makul FROM makul WHERE kode_makul LIKE ? ORDER BY kode_makul DESC";
-            ps = con.prepareStatement(query);
+            con = Koneksi.getKoneksi();
+            qry = "SELECT kode_makul FROM makul WHERE kode_makul LIKE ? ORDER BY kode_makul DESC";
+            ps = con.prepareStatement(qry);
             ps.setString(1, "TI" + kodeChar + "%");
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             
             while (rs.next()) {                
                 lastKode = rs.getString(1);
                 break;
             }
         } catch (SQLException e) {
-            System.err.println("Error makeId() : " + e);
+            System.err.println("Error makeId() : " + e.getMessage());
         }
         
         if (lastKode != null) {
@@ -134,6 +152,9 @@ public class MakulFrame extends javax.swing.JFrame {
         return kode;
     }
     
+    /**
+     * Method untuk mengatur lebar kolom tabel makul
+     */
     public void lebarKolom(){ 
         TableColumn column;
         tMakul.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF); 
@@ -149,10 +170,12 @@ public class MakulFrame extends javax.swing.JFrame {
         column.setPreferredWidth(140);
     }
     
+    /**
+     * Creates new form MakulFrame
+     */
     public MakulFrame() {
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
+        FrameSetting.setFrame(this);
         JamDigital.getJam(lbl_jam);
         lebarKolom();
         resetTable("");

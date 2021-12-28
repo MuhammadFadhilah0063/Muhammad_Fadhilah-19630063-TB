@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Dosen;
 import model.Mhs;
+import util.FrameSetting;
 import util.JamDigital;
 
 /**
@@ -28,13 +29,17 @@ public class DosenMhsFrame extends javax.swing.JFrame {
     private Mhs mhs;
     private Dosen dosen;
     private Connection con;
+    private Statement st;
+    private ResultSet rs;
     private String qry;
     
-    public ArrayList<Dosen> getDosenList(String keyword) {
+    /**
+     * Method untuk mengambil seluruh dosen
+     * @return dosenList
+     */
+    public ArrayList<Dosen> getDosenList() {
         ArrayList<Dosen> dosenList = new ArrayList<>();
         con = Koneksi.getKoneksi();
-        ResultSet rs;
-        Statement st;
         qry = "SELECT * FROM dosen";
         
         try {
@@ -49,13 +54,16 @@ public class DosenMhsFrame extends javax.swing.JFrame {
                 dosenList.add(dosen);
             }
         } catch (SQLException | NullPointerException ex) {
-            System.err.println("Koneksi Null Gagal");
+            System.err.println("Error getDosenList(): " + ex.getMessage());
         }
         return dosenList;
     }
     
-    public void selectDosen(String keyword) {
-        ArrayList<Dosen> list = getDosenList(keyword);
+    /**
+     * Method untuk menampilkan data dosen ke tabel dosen
+     */
+    public void selectDosen() {
+        ArrayList<Dosen> list = getDosenList();
         DefaultTableModel model = (DefaultTableModel) tDosen.getModel();
         Object[] row = new Object[5];
         int no = 1;
@@ -70,12 +78,18 @@ public class DosenMhsFrame extends javax.swing.JFrame {
         }
     }
     
-    public final void resetTable(String keyword) {
+    /**
+     * Method untuk mengatur ulang / refresh tabel dosen
+     */
+    public final void resetTable() {
         DefaultTableModel model = (DefaultTableModel) tDosen.getModel();
         model.setRowCount(0);
-        selectDosen(keyword);
+        selectDosen();
     }
 
+    /**
+     * Method untuk mengatur lebar kolom tabel dosen
+     */
     public void lebarKolom(){ 
         TableColumn column;
         tDosen.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF); 
@@ -91,23 +105,28 @@ public class DosenMhsFrame extends javax.swing.JFrame {
         column.setPreferredWidth(1000); 
     }
     
+    /**
+     * Method Constructor
+     */
     public DosenMhsFrame() {
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
+        FrameSetting.setFrame(this);
         lebarKolom();
         JamDigital.getJam(lbl_jam);
-        resetTable("");
+        resetTable();
     }
     
+    /**
+     * Method Constructor
+     * @param mhs 
+     */
     public DosenMhsFrame(Mhs mhs) {
         initComponents();
         this.mhs = mhs;
-        this.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
+        FrameSetting.setFrame(this);
         lebarKolom();
         JamDigital.getJam(lbl_jam);
-        resetTable("");
+        resetTable();
     }
 
     /**

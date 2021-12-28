@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package frame.mahasiswa;
 
 import connection.Koneksi;
@@ -19,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.Jadwal;
 import model.Mhs;
+import util.FrameSetting;
 import util.JamDigital;
 
 /**
@@ -29,22 +26,26 @@ public class JadwalMhsFrame extends javax.swing.JFrame {
     private Mhs mhs;
     private Jadwal jadwal;
     private Connection con;
+    private Statement st;
+    private ResultSet rs;
     private String qry;
     
-    public ArrayList<Jadwal> getJadwalList(String keyword) {
+    /**
+     * Method untuk mengambil seluruh jadwal
+     * @return jadwalList
+     */
+    public ArrayList<Jadwal> getJadwalList() {
         ArrayList<Jadwal> jadwalList = new ArrayList<>();
-        Connection con = Koneksi.getKoneksi();
-        Statement st;
-        ResultSet rs;
+        con = Koneksi.getKoneksi();
       
-        String query = "SELECT * FROM jadwal "
+        qry = "SELECT * FROM jadwal "
                 + "JOIN makul ON jadwal.kode_makul = makul.kode_makul "
                 + "JOIN dosen ON jadwal.nip_dosen = dosen.nip "
                 + "JOIN kelas ON jadwal.kode_kelas = kelas.kode_kelas ";
         
         try {
             st = con.createStatement();
-            rs = st.executeQuery(query);
+            rs = st.executeQuery(qry);
             while (rs.next()) {      
                 jadwal = new Jadwal(
                         rs.getString("kode_jadwal"), 
@@ -60,13 +61,16 @@ public class JadwalMhsFrame extends javax.swing.JFrame {
                 jadwalList.add(jadwal);
             }
         } catch (SQLException e) {
-            System.err.println("Error getJadwalList : " + e);
+            System.err.println("Error getJadwalList : " + e.getMessage());
         }
         return jadwalList;
     }
     
-    public void selectJadwal(String keyword) {
-        ArrayList<Jadwal> list = getJadwalList(keyword);
+    /**
+     * Method untuk menampilkan data jadwal ke tabel jadwal
+     */
+    public void selectJadwal() {
+        ArrayList<Jadwal> list = getJadwalList();
         DefaultTableModel model = (DefaultTableModel) tJadwal.getModel();
         Object[] row = new Object[8];
         int no = 1;
@@ -84,12 +88,18 @@ public class JadwalMhsFrame extends javax.swing.JFrame {
         }
     }
     
-    public final void resetTable(String keyword) {
+    /**
+     * Method untuk mengatur ulang / refresh tabel jadwal
+     */
+    public final void resetTable() {
         DefaultTableModel model = (DefaultTableModel) tJadwal.getModel();
         model.setRowCount(0);
-        selectJadwal(keyword);
+        selectJadwal();
     }
-
+    
+    /**
+     * Method untuk mengatur lebar kolom tabel jadwal
+     */
     public void lebarKolom(){ 
         TableColumn column;
         tJadwal.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -111,23 +121,28 @@ public class JadwalMhsFrame extends javax.swing.JFrame {
         column.setPreferredWidth(95); 
     }
     
+    /**
+     * Method Constructor
+     */
     public JadwalMhsFrame() {
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
+        FrameSetting.setFrame(this);
         lebarKolom();
         JamDigital.getJam(lbl_jam);
-        resetTable("");
+        resetTable();
     }
     
+    /**
+     * Method Constructor
+     * @param mhs 
+     */
     public JadwalMhsFrame(Mhs mhs) {
         initComponents();
         this.mhs = mhs;
-        this.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
+        FrameSetting.setFrame(this);
         lebarKolom();
         JamDigital.getJam(lbl_jam);
-        resetTable("");
+        resetTable();
     }
     
     

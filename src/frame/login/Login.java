@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package frame.login;
 
 import connection.Koneksi;
@@ -13,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import model.Mhs;
+import util.FrameSetting;
 
 /**
  *
@@ -27,9 +24,8 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
+        FrameSetting.setFrame(this);
         jPanel3.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -290,14 +286,11 @@ public class Login extends javax.swing.JFrame {
 
     private void lbLoginMhsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLoginMhsMouseClicked
         // TODO add your handling code here:
-        String npm = eNpm.getText();
-        String passMhs = edPassMhs.getText();
-        
         try{
             con = Koneksi.getKoneksi();
             st = con.createStatement();
             
-            qry = "SELECT * FROM mhs WHERE npm='"+npm+"' AND password='"+passMhs+"'";                
+            qry = "SELECT * FROM mhs WHERE npm='" + eNpm.getText() + "' AND password='" + edPassMhs.getText() + "'";                
             rs = st.executeQuery(qry);
             
             if(rs.next()){
@@ -314,14 +307,11 @@ public class Login extends javax.swing.JFrame {
 
     private void lbLoginAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLoginAdminMouseClicked
         // TODO add your handling code here:
-        String userAdmin = edUserAdmin.getText();
-        String passAdmin = edPassAdmin.getText();
-        
         try{
             con = Koneksi.getKoneksi();
             st = con.createStatement();
             
-            qry = "SELECT * FROM admin WHERE username='"+userAdmin+"' AND password='"+passAdmin+"'";                
+            qry = "SELECT * FROM admin WHERE username='" + edUserAdmin.getText() + "' AND password='" + edPassAdmin.getText() + "'";                
             rs = st.executeQuery(qry);
             
             if(rs.next()){

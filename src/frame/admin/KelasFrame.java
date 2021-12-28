@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package frame.admin;
 
 import connection.Koneksi;
@@ -20,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import model.Kelas;
+import util.FrameSetting;
 import util.JamDigital;
 
 /**
@@ -31,13 +28,18 @@ public class KelasFrame extends javax.swing.JFrame {
     private Kelas kelas;
     private Connection con;
     private PreparedStatement ps;
+    private ResultSet rs;
+    private Statement st;
     private String qry;
 
+    /**
+     * Method untuk mengambil seluruh kelas
+     * @param keyword
+     * @return kelasList
+     */
     public ArrayList<Kelas> getKelasList(String keyword) {
         ArrayList<Kelas> kelasList = new ArrayList<>();
         con = Koneksi.getKoneksi();
-        ResultSet rs;
-        Statement st;
         qry = "SELECT * FROM kelas" + keyword;
         
         try {
@@ -51,11 +53,14 @@ public class KelasFrame extends javax.swing.JFrame {
                 kelasList.add(kelas);
             }
         } catch (SQLException | NullPointerException ex) {
-            System.err.println("Koneksi Null Gagal");
+            System.err.println("Error getKelasList(): " + ex.getMessage());
         }
         return kelasList;
     }
     
+    /**
+     * Method untuk menampilkan data kelas ke tabel kelas
+     */
     public void selectKelas(String keyword) {
         ArrayList<Kelas> list = getKelasList(keyword);
         DefaultTableModel model = (DefaultTableModel) tKelas.getModel();
@@ -71,12 +76,19 @@ public class KelasFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Method untuk mengatur ulang / refresh tabel kelas
+     */
     public final void resetTable(String keyword) {
         DefaultTableModel model = (DefaultTableModel) tKelas.getModel();
         model.setRowCount(0);
         selectKelas(keyword);
     }
     
+    /**
+     * Method untuk membuat kode kelas
+     * @return kode
+     */
     public String makeKode() {
         String kode = null;
         String date = null; 
@@ -86,18 +98,18 @@ public class KelasFrame extends javax.swing.JFrame {
         date = df.format(now);
         kode = "TI" + date + cbSemester.getSelectedItem().toString().substring(9, 10) + "01";
         try {
-            Connection con = Koneksi.getKoneksi();
-            String query = "SELECT kode_kelas FROM kelas WHERE kode_kelas LIKE ? ORDER BY kode_kelas DESC";
-            ps = con.prepareStatement(query);
+            con = Koneksi.getKoneksi();
+            qry = "SELECT kode_kelas FROM kelas WHERE kode_kelas LIKE ? ORDER BY kode_kelas DESC";
+            ps = con.prepareStatement(qry);
             ps.setString(1, "TI" + date + cbSemester.getSelectedItem().toString().substring(9, 10) + "%");
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             
             while (rs.next()) {                
                 lastKode = rs.getString(1);
                 break;
             }
         } catch (SQLException e) {
-            System.err.println("Error makeKode() : " + e);
+            System.err.println("Error makeKode() : " + e.getMessage());
         }
         
         if (lastKode != null) {
@@ -108,6 +120,9 @@ public class KelasFrame extends javax.swing.JFrame {
         return kode;
     }
     
+    /**
+     * Method untuk membersihkan field
+     */
     public void clearField() {
         eKode.setText("");
         eKelas.setText("");
@@ -116,6 +131,9 @@ public class KelasFrame extends javax.swing.JFrame {
         bKode.setEnabled(true);
     }
     
+    /**
+     * Method untuk mengatur lebar kolom tabel kelas
+     */
     public void lebarKolom(){ 
         TableColumn column;
         tKelas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF); 
@@ -129,10 +147,12 @@ public class KelasFrame extends javax.swing.JFrame {
         column.setPreferredWidth(399); 
     }
     
+    /**
+     * Creates new form MakulFrame
+     */
     public KelasFrame() {
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
+        FrameSetting.setFrame(this);
         lebarKolom();
         JamDigital.getJam(lbl_jam);
         resetTable("");
@@ -427,7 +447,7 @@ public class KelasFrame extends javax.swing.JFrame {
                 try {
                     con = Koneksi.getKoneksi();
                     qry = "DELETE FROM kelas WHERE kode_kelas = ?";
-                    PreparedStatement ps = con.prepareStatement(qry);
+                    ps = con.prepareStatement(qry);
                     ps.setString(1, eKode.getText());
                     ps.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Berhasil menghapus data", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);

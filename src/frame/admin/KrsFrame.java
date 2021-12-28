@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package frame.admin;
 
 import frame.admin.*;
@@ -34,6 +30,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import util.FrameSetting;
 import util.JamDigital;
 
 /**
@@ -46,89 +43,62 @@ public class KrsFrame extends javax.swing.JFrame {
     private Connection con;
     private ResultSet rs;
     private PreparedStatement ps;
+    private Statement st;
     private String qry;
     private String idKrs;
     
+    /**
+     * Method untuk mengambil seluruh krs
+     * @param keyword 
+     * @return ArrayList<Krs> krsList
+     */
     public ArrayList<Krs> getKrsList(String keyword) {
-        ArrayList<Makul> makulList = getMakulList();
-        ArrayList<Dosen> dosenList = getDosenList();
-        ArrayList<Kelas> kelasList = getKelasList();
         ArrayList<Krs> krsList = new ArrayList<>();
         
-        String kodeMakul, nip, kodeKelas;
-        String makul = null; 
-        String semester = null; 
-        String dosen = null; 
-        String kelas = null;
-        int sks = 0;
-        
-        Connection con = Koneksi.getKoneksi();
-        PreparedStatement ps;
-        ResultSet rs;
-        String query = "SELECT krs.*, mhs.*, jadwal.* FROM krs "
-                + "INNER JOIN mhs ON krs.id_mhs = mhs.id_mhs "
-                + "JOIN jadwal ON krs.kode_jadwal = jadwal.kode_jadwal";
+        qry = "SELECT * FROM krs "
+                + "JOIN mhs ON krs.id_mhs = mhs.id_mhs "
+                + "JOIN jadwal ON krs.kode_jadwal = jadwal.kode_jadwal "
+                + "JOIN makul ON jadwal.kode_makul = makul.kode_makul "
+                + "JOIN dosen ON jadwal.nip_dosen = dosen.nip "
+                + "JOIN kelas ON jadwal.kode_kelas = kelas.kode_kelas";
         
         if (!keyword.equals("")) 
-            query = query + " WHERE mhs.npm LIKE ?";
+            qry = qry + " WHERE mhs.npm LIKE ?";
             
         try {
-            ps = con.prepareStatement(query);
+            ps = con.prepareStatement(qry);
             if (!keyword.equals("")) {
                 ps.setString(1, "%" + eCari.getText() + "%");
             }
             rs = ps.executeQuery();
-            while (rs.next()) { 
-                // query makul
-                kodeMakul = rs.getString("jadwal.kode_makul");
-                for (int i = 0; i < makulList.size(); i++) {
-                    if (kodeMakul.equals(makulList.get(i).getKodeMakul())) {
-                        makul = makulList.get(i).getMakul();
-                        sks = makulList.get(i).getSks();
-                        semester = makulList.get(i).getSemester();
-                    }
-                }
-                
-                // query dosen
-                nip = rs.getString("jadwal.nip_dosen");
-                for (int i = 0; i < dosenList.size(); i++) {
-                    if (nip.equals(dosenList.get(i).getNip())) {
-                        dosen = dosenList.get(i).getNama();
-                    }
-                }
-                
-                // query kelas
-                kodeKelas = rs.getString("jadwal.kode_kelas");
-                for (int i = 0; i < kelasList.size(); i++) {
-                    if (kodeKelas.equals(kelasList.get(i).getKodeKelas())) {
-                        kelas = kelasList.get(i).getKelas();
-
-                    }
-                }
-                
+            while (rs.next()) {   
                 krs = new Krs(rs.getString("id_krs"),
                                 rs.getInt("mhs.id_mhs"),
                                 rs.getString("mhs.npm"),
                                 rs.getString("mhs.nama"),
                                 rs.getString("mhs.prog_studi"),
                                 rs.getString("jadwal.kode_jadwal"),
-                                rs.getString("jadwal.kode_makul"),
-                                makul,
-                                sks,
-                                semester,
-                                rs.getString("jadwal.kode_kelas"),
-                                kelas,
-                                rs.getString("jadwal.nip_dosen"),
-                                dosen,
+                                rs.getString("makul.kode_makul"),
+                                rs.getString("makul.makul"),
+                                rs.getInt("makul.sks"),
+                                rs.getString("makul.semester"),
+                                rs.getString("kelas.kode_kelas"),
+                                rs.getString("kelas.nama_kelas"),
+                                rs.getString("dosen.nip"),
+                                rs.getString("dosen.nama_dosen"),
                                 rs.getString("tahun_ajar"));
                 krsList.add(krs);
             }
         } catch (SQLException e) {
-            System.err.println("Error getJadwalList : " + e);
+            System.err.println("Error getKrsList : " + e.getMessage());
         }
         return krsList;
     }
     
+    /**
+     * Method untuk menampilkan data krs ke tabel krs
+     * @param keyword 
+     */
     public void selectKrs(String keyword) {
         ArrayList<Krs> list = getKrsList(keyword);
         DefaultTableModel model = (DefaultTableModel) tKrsMhs.getModel();
@@ -152,29 +122,34 @@ public class KrsFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Method untuk mengatur ulang / refresh tabel krs
+     * @param keyword 
+     */
     public final void resetTable(String keyword) {
         DefaultTableModel model = (DefaultTableModel) tKrsMhs.getModel();
         model.setRowCount(0);
         selectKrs(keyword);
     }
 
+    /**
+     * Method untuk menampilkan jadwal matakuliah pada tabel daftar matakuliah
+     */
     public void setTableList() {
         Jadwal jadwal;
         ArrayList<Jadwal> jadwalList = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) tList.getModel();
         Object[] row = new Object[5];
         int no = 1;
-        Connection con = Koneksi.getKoneksi();
-        PreparedStatement ps;
-        ResultSet rs;
-        String query = "SELECT jadwal.*, makul.*, dosen.*, kelas.* FROM jadwal "
-                + "INNER JOIN makul ON jadwal.kode_makul = makul.kode_makul "
+        con = Koneksi.getKoneksi();
+        qry = "SELECT * FROM jadwal "
+                + "JOIN makul ON jadwal.kode_makul = makul.kode_makul "
                 + "JOIN dosen ON jadwal.nip_dosen = dosen.nip "
-                + "JOIN kelas ON jadwal.kode_kelas = kelas.kode_kelas WHERE "
-                + "jadwal.semester_jadwal LIKE ? ORDER BY jadwal.kode_jadwal";
-        
+                + "JOIN kelas ON jadwal.kode_kelas = kelas.kode_kelas "
+                + "WHERE jadwal.semester_jadwal LIKE ? ORDER BY jadwal.kode_jadwal";
+
         try {
-            ps = con.prepareStatement(query);
+            ps = con.prepareStatement(qry);
             ps.setString(1, "%" + cbSemester.getSelectedItem().toString() + "%");
 
             rs = ps.executeQuery();
@@ -193,7 +168,7 @@ public class KrsFrame extends javax.swing.JFrame {
                 jadwalList.add(jadwal);
             }
         } catch (SQLException e) {
-            System.err.println("Error getJadwalList : " + e);
+            System.err.println("Error getJadwalList : " + e.getMessage());
         }
         
         for (int i = 0; i < jadwalList.size(); i++) {
@@ -206,85 +181,27 @@ public class KrsFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Method untuk mengatur ulang / refresh tabel daftar makul
+     */
     public final void resetTableList() {
         DefaultTableModel model = (DefaultTableModel) tList.getModel();
         model.setRowCount(0);
     }
     
-    public ArrayList<Makul> getMakulList() {
-        ArrayList<Makul> makulList = new ArrayList<>();
-        Makul makul;
-        
-        try {
-        con = Koneksi.getKoneksi();
-        Statement st = con.createStatement();
-            
-            // query makul
-            ResultSet rs = st.executeQuery("SELECT * FROM makul");
-            
-            while (rs.next()){
-                makul = new Makul(rs.getString("kode_makul"), rs.getString("makul"), 
-                                    rs.getInt("sks"), rs.getString("semester"));
-                makulList.add(makul);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        
-        return makulList;
-    }
-    
-    public ArrayList<Dosen> getDosenList() {
-        ArrayList<Dosen> dosenList = new ArrayList<>();
-        Dosen dosen;
-        
-        try {
-        con = Koneksi.getKoneksi();
-        Statement st = con.createStatement();
-            
-            // query dosen
-            ResultSet rs = st.executeQuery("SELECT * FROM dosen");
-            
-            while (rs.next()){
-                dosen = new Dosen(rs.getString("nip"), rs.getString("nama_dosen"));
-                dosenList.add(dosen);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        
-        return dosenList;
-    }
-    
-    public ArrayList<Kelas> getKelasList() {
-        ArrayList<Kelas> kelasList = new ArrayList<>();
-        Kelas kelas;
-        
-        try {
-        con = Koneksi.getKoneksi();
-        Statement st = con.createStatement();
-            
-            // query kelas
-            ResultSet rs = st.executeQuery("SELECT * FROM kelas");
-            
-            while (rs.next()){
-                kelas = new Kelas(rs.getString("kode_kelas"), rs.getString("nama_kelas"));
-                kelasList.add(kelas);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        
-        return kelasList;
-    }
-    
+    /**
+     * Method untuk mengambil daftar jadwal pada tabel krs yang sudah diambil 
+     * mahasiswa berdasarkan idMhs
+     * @param idMhs
+     * @return ArrayList<String> listKrsMhs
+     */
     public ArrayList<String> getListKrsMhs(int id) {
         ArrayList<String> listKrsMhs = new ArrayList<>();
         String krsMhs;
         
         try {
             con = Koneksi.getKoneksi();
-            Statement st = con.createStatement();
+            st = con.createStatement();
             rs = st.executeQuery("SELECT * FROM krs WHERE id_mhs = " + id);
 
             while (rs.next()){
@@ -297,33 +214,40 @@ public class KrsFrame extends javax.swing.JFrame {
         return listKrsMhs;
     }
     
+    /**
+     * Method untuk membuat idKrs
+     * @return id
+     */
     public String makeId() {
-        String kode = null;
+        String id = null;
         String lastKode = null;
-        kode = "KS0001";
+        id = "KS0001";
         try {
-            Connection con = Koneksi.getKoneksi();
-            String query = "SELECT id_krs FROM krs WHERE id_krs LIKE ? ORDER BY id_krs DESC";
-            ps = con.prepareStatement(query);
+            con = Koneksi.getKoneksi();
+            qry = "SELECT id_krs FROM krs WHERE id_krs LIKE ? ORDER BY id_krs DESC";
+            ps = con.prepareStatement(qry);
             ps.setString(1, "KS%");
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             
             while (rs.next()) {                
                 lastKode = rs.getString(1);
                 break;
             }
         } catch (SQLException e) {
-            System.err.println("Error makeId() : " + e);
+            System.err.println("Error makeId() : " + e.getMessage());
         }
         
         if (lastKode != null) {
             int angka = Integer.parseInt(lastKode.substring(2));
             angka++;
-            kode = "KS" + String.format("%04d", angka);
+            id = "KS" + String.format("%04d", angka);
         }
-        return kode;
+        return id;
     }
     
+    /**
+     * Method untuk membersihkan field
+     */
     public void clearField() {
         eNama.setText("");
         eNpm.setText("");
@@ -337,6 +261,9 @@ public class KrsFrame extends javax.swing.JFrame {
         cbMhs.setSelectedIndex(0);
     }
     
+    /**
+     * Method untuk mengatur tahun ajar sesuai tahun sekarang
+     */
     public void setTahunAjar() {
         String year, tahunAjar = "";
         int nextYear;
@@ -350,10 +277,16 @@ public class KrsFrame extends javax.swing.JFrame {
         eTahun.setText(tahunAjar);
     }
     
+    /**
+     * Method untuk mengatur label daftar makul sesuai dengan semester yang dipilih
+     */
     public void setLabelDaftar() {
         lblDaftar.setText("Daftar Matakuliah " + cbSemester.getSelectedItem().toString());
     }
     
+    /**
+     * Method untuk mengatur lebar kolom tabel krs dan tabel daftar makul
+     */
     public void lebarKolom(){ 
         TableColumn column;
         tList.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF); 
@@ -397,6 +330,9 @@ public class KrsFrame extends javax.swing.JFrame {
         column.setPreferredWidth(50);
     }
     
+    /**
+     * Method untuk mengambil daftar mahasiswa dan menampilkan ke comboBoxMhs
+     */
     public void setListComboBoxMhs() {
         String npm, nama = null;
         int idMhs = 0;
@@ -404,7 +340,7 @@ public class KrsFrame extends javax.swing.JFrame {
         
         try {
             con = Koneksi.getKoneksi();
-            Statement st = con.createStatement();
+            st = con.createStatement();
             rs = st.executeQuery("SELECT * FROM mhs");
             
             while (rs.next()){
@@ -414,13 +350,16 @@ public class KrsFrame extends javax.swing.JFrame {
                 cbMhs.addItem(idMhs + " | " + nama + " (" + npm + ")");
             }
         } catch (Exception e) {
+            System.err.println("Error setListComboBoxMhs(): " + e.getMessage());
         }
     }
     
+    /**
+     * Creates new form MakulFrame
+     */
     public KrsFrame() {
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
+        FrameSetting.setFrame(this);
         JamDigital.getJam(lbl_jam);
         lebarKolom();
         setTahunAjar();
@@ -823,7 +762,7 @@ public class KrsFrame extends javax.swing.JFrame {
                try {
                     con = Koneksi.getKoneksi();
                     qry = "DELETE FROM krs WHERE id_krs = ?";
-                    PreparedStatement ps = con.prepareStatement(qry);
+                    ps = con.prepareStatement(qry);
                     ps.setString(1, idKrs);
                     ps.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Berhasil menghapus data", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);
@@ -880,7 +819,7 @@ public class KrsFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             con = Koneksi.getKoneksi();
-            Statement st = con.createStatement();
+            st = con.createStatement();
 
             // query mhs
             rs = st.executeQuery("SELECT * FROM mhs WHERE npm = " + eNpm.getText());

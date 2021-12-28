@@ -20,11 +20,10 @@ public class Koneksi {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(URL,USER,PASS);
-            System.out.println("Koneksi Berhasil");
             return con;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Koneksi Gagal");
-            System.err.println(e);
+            System.err.println("Error getKoneksi(): " + e.getMessage());
             return con = null;
         }
     }

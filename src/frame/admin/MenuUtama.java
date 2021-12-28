@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package frame.admin;
 
 import frame.mahasiswa.KrsMhsFrame;
 import java.awt.Color;
+import util.FrameSetting;
 
 /**
  *
@@ -19,9 +16,8 @@ public class MenuUtama extends javax.swing.JFrame {
      */
     public MenuUtama() {
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
+        FrameSetting.setFrame(this);
         jPanel2.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
     }
 
     /**

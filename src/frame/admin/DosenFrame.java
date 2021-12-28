@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package frame.admin;
 
 import connection.Koneksi;
@@ -33,13 +29,18 @@ public class DosenFrame extends javax.swing.JFrame {
     private Dosen dosen;
     private Connection con;
     private PreparedStatement ps;
+    private ResultSet rs;
+    private Statement st;
     private String qry;
 
+    /**
+     * Method untuk mengambil seluruh dosen
+     * @param keyword
+     * @return dosenList
+     */
     public ArrayList<Dosen> getDosenList(String keyword) {
         ArrayList<Dosen> dosenList = new ArrayList<>();
         con = Koneksi.getKoneksi();
-        ResultSet rs;
-        Statement st;
         qry = "SELECT * FROM dosen" + keyword;
         
         try {
@@ -54,11 +55,14 @@ public class DosenFrame extends javax.swing.JFrame {
                 dosenList.add(dosen);
             }
         } catch (SQLException | NullPointerException ex) {
-            System.err.println("Koneksi Null Gagal");
+            System.err.println("Error getDosenList(): " + ex.getMessage());
         }
         return dosenList;
     }
     
+    /**
+     * Method untuk menampilkan data dosen ke tabel dosen
+     */
     public void selectDosen(String keyword) {
         ArrayList<Dosen> list = getDosenList(keyword);
         DefaultTableModel model = (DefaultTableModel) tDosen.getModel();
@@ -75,12 +79,18 @@ public class DosenFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Method untuk mengatur ulang / refresh tabel dosen
+     */
     public final void resetTable(String keyword) {
         DefaultTableModel model = (DefaultTableModel) tDosen.getModel();
         model.setRowCount(0);
         selectDosen(keyword);
     }
     
+    /**
+     * Method untuk membersihkan field
+     */
     public void clearField() {
         eNip.setText("");
         eNama.setText("");
@@ -90,6 +100,9 @@ public class DosenFrame extends javax.swing.JFrame {
         eNip.requestFocus();
     }
 
+    /**
+     * Method untuk mengatur lebar kolom tabel dosen
+     */
     public void lebarKolom(){ 
         TableColumn column;
         tDosen.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -105,6 +118,9 @@ public class DosenFrame extends javax.swing.JFrame {
         column.setPreferredWidth(359); 
     }
     
+    /**
+     * Creates new form MakulFrame
+     */
     public DosenFrame() {
         initComponents();
         FrameSetting.setFrame(this);
@@ -428,7 +444,7 @@ public class DosenFrame extends javax.swing.JFrame {
                 try {
                     con = Koneksi.getKoneksi();
                     qry = "DELETE FROM dosen WHERE nip = ?";
-                    PreparedStatement ps = con.prepareStatement(qry);
+                    ps = con.prepareStatement(qry);
                     ps.setString(1, eNip.getText());
                     ps.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Berhasil menghapus data", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);

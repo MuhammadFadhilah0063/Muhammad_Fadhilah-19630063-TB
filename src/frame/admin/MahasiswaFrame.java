@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package frame.admin;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util;
@@ -43,6 +39,7 @@ import model.Mhs;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+import util.FrameSetting;
 import util.JamDigital;
 
 /**
@@ -54,15 +51,20 @@ public class MahasiswaFrame extends javax.swing.JFrame {
     private Mhs mhs;
     private Connection con;
     private PreparedStatement ps;
+    private ResultSet rs;
+    private Statement st;
     private String qry;
     private BufferedImage bImage;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     
+    /**
+     * Method untuk mengambil seluruh mahasiswa
+     * @param keyword
+     * @return mhsList
+     */
     public ArrayList<Mhs> getMhsList(String keyword) {
         ArrayList<Mhs> mhsList = new ArrayList<>();
         con = Koneksi.getKoneksi();
-        ResultSet rs;
-        Statement st;
         qry = "SELECT * FROM mhs" + keyword;
         
         try {
@@ -82,11 +84,14 @@ public class MahasiswaFrame extends javax.swing.JFrame {
                 mhsList.add(mhs);
             }
         } catch (SQLException | NullPointerException ex) {
-            System.err.println("Koneksi Null Gagal");
+            System.err.println("Error getMhsList(): " + ex.getMessage());
         }
         return mhsList;
     }
     
+    /**
+     * Method untuk menampilkan data mhs ke tabel mhs
+     */
     public void selectMhs(String keyword) {
         ArrayList<Mhs> list = getMhsList(keyword);
         DefaultTableModel model = (DefaultTableModel) tMhs.getModel();
@@ -107,12 +112,19 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Method untuk mengatur ulang / refresh tabel mhs
+     */
     public final void resetTable(String keyword) {
         DefaultTableModel model = (DefaultTableModel) tMhs.getModel();
         model.setRowCount(0);
         selectMhs(keyword);
     }
     
+    /**
+     * Method untuk menentukan radio button yang dipilih
+     * @param jenisKelamin 
+     */
     public void rbJenisKelaminSetSelected(String jenisKelamin) {
         if (jenisKelamin.equals("Laki-laki")) {
             rbLaki.setSelected(true);
@@ -121,6 +133,10 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Method untuk mengambil data radio button yang dipilih
+     * @return String jenisKelamin
+     */
     public String rbJenisKelaminGetSelected() {
         if (rbLaki.isSelected()) {
             return "Laki-laki";
@@ -131,38 +147,45 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Method untuk membuat npm
+     * @return npm
+     */
     public String makeNpm() {
-        String kode = null;
+        String npm = null;
         String date = null; 
-        String lastKode = null;
+        String lastNpm = null;
         Date now = new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy");
         date = df.format(now).substring(2);
-        kode = date + "630001";
+        npm = date + "630001";
 
         try {
-            Connection con = Koneksi.getKoneksi();
-            String query = "SELECT npm FROM mhs WHERE npm LIKE ? ORDER BY id_mhs DESC";
-            ps = con.prepareStatement(query);
+            con = Koneksi.getKoneksi();
+            qry = "SELECT npm FROM mhs WHERE npm LIKE ? ORDER BY id_mhs DESC";
+            ps = con.prepareStatement(qry);
             ps.setString(1, date + "63%");
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             
             while (rs.next()) {                
-                lastKode = rs.getString(1);
+                lastNpm = rs.getString(1);
                 break;
             }
         } catch (SQLException e) {
-            System.err.println("Error makeKode() : " + e);
+            System.err.println("Error makeNpm() : " + e.getMessage());
         }
         
-        if (lastKode != null) {
-            int angka = Integer.parseInt(lastKode.substring(4));
+        if (lastNpm != null) {
+            int angka = Integer.parseInt(lastNpm.substring(4));
             angka++;
-            kode = date + "63" + String.format("%04d", angka);
+            npm = date + "63" + String.format("%04d", angka);
         }
-        return kode;
+        return npm;
     }
     
+    /**
+     * Method untuk membersihkan field
+     */
     public void clearField() {
         eNama.setText("");
         eNpm.setText("");
@@ -176,6 +199,11 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         bSimpan.setEnabled(true);
     }
     
+    /**
+     * Method format tanggal
+     * @param tanggal
+     * @return date
+     */
     public Date getFormattedDate(String tanggal) {
         try {
             Date tanggalLahir = dateFormat.parse(tanggal);
@@ -186,6 +214,11 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Method untuk mengambil foto dalam format blob
+     * @param imageBlob
+     * @return BufferedImage b
+     */
     public BufferedImage getBufferedImage(Blob imageBlob) {
         InputStream binaryStream = null;
         BufferedImage b = null;
@@ -198,6 +231,11 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         return b;
     }
     
+    /**
+     * Method untuk mengambil foto untuk diubah menjadi format blob
+     * @param bi
+     * @return Blob blFile
+     */
     public Blob getBlobImage(BufferedImage bi) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Blob blFile = null;
@@ -210,6 +248,12 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         return blFile;
     }
     
+    /**
+     * Method untuk mengubah ukuran foto agar sesuai dengan ukuran yang ditentukan
+     * @param originalImage
+     * @param type
+     * @return BufferedImage resizedImage
+     */
     private BufferedImage resizeImage(BufferedImage originalImage, int type) {
         BufferedImage resizedImage = new BufferedImage(lFoto.getWidth(), lFoto.getHeight(), type);
         Graphics2D g = resizedImage.createGraphics();
@@ -218,6 +262,9 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         return resizedImage;
     }
     
+    /**
+     * Method untuk mengatur lebar kolom tabel mhs
+     */
     public void lebarKolom(){ 
         TableColumn column;
         tMhs.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF); 
@@ -241,6 +288,11 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         column.setPreferredWidth(350);
     }
     
+    /**
+     * Method untuk mengambil foto dalam format blob dari database
+     * @param url
+     * @return Blob foto
+     */
     public Blob getFoto(String url) {
         Blob foto = null;
         
@@ -257,10 +309,12 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         return foto;
     }
     
+    /**
+     * Creates new form MahasiswaFrame
+     */
     public MahasiswaFrame() {
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
+        FrameSetting.setFrame(this);
         lebarKolom();
         rbLaki.setSelected(true);
         JamDigital.getJam(lbl_jam);
@@ -612,7 +666,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
                 try {
                     con = Koneksi.getKoneksi();
                     qry = "DELETE FROM mhs WHERE npm = ?";
-                    PreparedStatement ps = con.prepareStatement(qry);
+                    ps = con.prepareStatement(qry);
                     ps.setString(1, eNpm.getText());
                     ps.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Berhasil menghapus data", "Pemberitahuan", JOptionPane.INFORMATION_MESSAGE);

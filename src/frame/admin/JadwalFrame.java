@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package frame.admin;
 
 import connection.Koneksi;
@@ -22,6 +18,7 @@ import model.Dosen;
 import model.Jadwal;
 import model.Kelas;
 import model.Makul;
+import util.FrameSetting;
 import util.JamDigital;
 
 /**
@@ -33,26 +30,31 @@ public class JadwalFrame extends javax.swing.JFrame {
     private Jadwal jadwal;
     private Connection con;
     private PreparedStatement ps;
+    private ResultSet rs;
+    private Statement st;
     private String qry;
     
+    /**
+     * Method untuk mengambil seluruh jadwal
+     * @param keyword
+     * @return jadwalList
+     */
     public ArrayList<Jadwal> getJadwalList(String keyword) {
         ArrayList<Jadwal> jadwalList = new ArrayList<>();
-        Connection con = Koneksi.getKoneksi();
-        PreparedStatement ps;
-        ResultSet rs;
-        String query = "SELECT jadwal.*, makul.*, dosen.*, kelas.* FROM jadwal "
-                + "INNER JOIN makul ON jadwal.kode_makul = makul.kode_makul "
+        con = Koneksi.getKoneksi();
+        qry = "SELECT * FROM jadwal "
+                + "JOIN makul ON jadwal.kode_makul = makul.kode_makul "
                 + "JOIN dosen ON jadwal.nip_dosen = dosen.nip "
-                + "JOIN kelas ON jadwal.kode_kelas = kelas.kode_kelas";
+                + "JOIN kelas ON jadwal.kode_kelas = kelas.kode_kelas ";
         
         String order = " ORDER BY jadwal.kode_jadwal";
         if (!keyword.equals("")) 
-            query = query + " WHERE jadwal.semester_jadwal LIKE ?";
+            qry = qry + " WHERE jadwal.semester_jadwal LIKE ?";
         
-        query = query + order;
+        qry = qry + order;
             
         try {
-            ps = con.prepareStatement(query);
+            ps = con.prepareStatement(qry);
             if (!keyword.equals("")) {
                 ps.setString(1, "%" + eCari.getText() + "%");
             }
@@ -72,11 +74,14 @@ public class JadwalFrame extends javax.swing.JFrame {
                 jadwalList.add(jadwal);
             }
         } catch (SQLException e) {
-            System.err.println("Error getJadwalList : " + e);
+            System.err.println("Error getJadwalList : " + e.getMessage());
         }
         return jadwalList;
     }
     
+    /**
+     * Method untuk menampilkan data jadwal ke tabel jadwal
+     */
     public void selectJadwal(String keyword) {
         ArrayList<Jadwal> list = getJadwalList(keyword);
         DefaultTableModel model = (DefaultTableModel) tJadwal.getModel();
@@ -96,12 +101,19 @@ public class JadwalFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Method untuk mengatur ulang / refresh tabel jadwal
+     */
     public final void resetTable(String keyword) {
         DefaultTableModel model = (DefaultTableModel) tJadwal.getModel();
         model.setRowCount(0);
         selectJadwal(keyword);
     }
     
+    /**
+     * Method untuk membuat kode jadwal
+     * @return kode
+     */
     public String makeKode() {
         String kode = null;
         String date = null; 
@@ -111,9 +123,9 @@ public class JadwalFrame extends javax.swing.JFrame {
         date = df.format(now);
         kode = "TI0" + cbSemester.getSelectedItem().toString().substring(9, 10) + date + "01";
         try {
-            Connection con = Koneksi.getKoneksi();
-            String query = "SELECT kode_jadwal FROM jadwal WHERE kode_jadwal LIKE ? ORDER BY kode_jadwal DESC";
-            ps = con.prepareStatement(query);
+            con = Koneksi.getKoneksi();
+            qry = "SELECT kode_jadwal FROM jadwal WHERE kode_jadwal LIKE ? ORDER BY kode_jadwal DESC";
+            ps = con.prepareStatement(qry);
             ps.setString(1, "TI0" + cbSemester.getSelectedItem().toString().substring(9, 10) + date + "%");
             ResultSet rs = ps.executeQuery();
             
@@ -122,7 +134,7 @@ public class JadwalFrame extends javax.swing.JFrame {
                 break;
             }
         } catch (SQLException e) {
-            System.err.println("Error makeKode() : " + e);
+            System.err.println("Error makeKode() : " + e.getMessage());
         }
         
         if (lastKode != null) {
@@ -133,6 +145,9 @@ public class JadwalFrame extends javax.swing.JFrame {
         return kode;
     }
     
+    /**
+     * Method untuk membersihkan field
+     */
     public void clearField() {
         eKode.setText("");
         cbSemester.setSelectedIndex(0);
@@ -144,72 +159,87 @@ public class JadwalFrame extends javax.swing.JFrame {
         bKode.setEnabled(true);
     }
     
+    /**
+     * Method untuk mengambil daftar makul
+     * @return ArrayList<Makul> makulList
+     */
     public ArrayList<Makul> getMakulList() {
         ArrayList<Makul> makulList = new ArrayList<>();
         Makul makul;
         
         try {
         con = Koneksi.getKoneksi();
-        Statement st = con.createStatement();
+        st = con.createStatement();
             
             // query makul
-            ResultSet rs = st.executeQuery("SELECT * FROM makul");
+            rs = st.executeQuery("SELECT * FROM makul");
             
             while (rs.next()){
                 makul = new Makul(rs.getString("kode_makul"), rs.getString("makul"));
                 makulList.add(makul);
             }
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error getMakulList(): " + e.getMessage());
         }
         
         return makulList;
     }
     
+    /**
+     * Method untuk mengambil daftar dosen
+     * @return ArrayList<Dosen> dosenList
+     */
     public ArrayList<Dosen> getDosenList() {
         ArrayList<Dosen> dosenList = new ArrayList<>();
         Dosen dosen;
         
         try {
         con = Koneksi.getKoneksi();
-        Statement st = con.createStatement();
+        st = con.createStatement();
             
             // query dosen
-            ResultSet rs = st.executeQuery("SELECT * FROM dosen");
+            rs = st.executeQuery("SELECT * FROM dosen");
             
             while (rs.next()){
                 dosen = new Dosen(rs.getString("nip"), rs.getString("nama_dosen"));
                 dosenList.add(dosen);
             }
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error getDosenList(): " + e.getMessage());
         }
         
         return dosenList;
     }
     
+    /**
+     * Method untuk mengambil daftar kelas
+     * @return ArrayList<Kelas> kelasList
+     */
     public ArrayList<Kelas> getKelasList() {
         ArrayList<Kelas> kelasList = new ArrayList<>();
         Kelas kelas;
         
         try {
         con = Koneksi.getKoneksi();
-        Statement st = con.createStatement();
+        st = con.createStatement();
             
             // query kelas
-            ResultSet rs = st.executeQuery("SELECT * FROM kelas");
+            rs = st.executeQuery("SELECT * FROM kelas");
             
             while (rs.next()){
                 kelas = new Kelas(rs.getString("kode_kelas"), rs.getString("nama_kelas"));
                 kelasList.add(kelas);
             }
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error getKelasList(): " + e.getMessage());
         }
         
         return kelasList;
     }
 
+    /**
+     * Method untuk mengatur lebar kolom tabel jadwal
+     */
     public void lebarKolom(){ 
         TableColumn column;
         tJadwal.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF); 
@@ -231,6 +261,10 @@ public class JadwalFrame extends javax.swing.JFrame {
         column.setPreferredWidth(70);
     }
     
+    /**
+     * Method untuk mengambil daftar makul, dosen, kelas dan menampilkannya 
+     * di comboBox sebagai pilihan
+     */
     public void getListComboBox() {
         cbMakul.removeAllItems();
         cbDosen.removeAllItems();
@@ -238,12 +272,12 @@ public class JadwalFrame extends javax.swing.JFrame {
         
         try {
             con = Koneksi.getKoneksi();
-            Statement st = con.createStatement();
+            st = con.createStatement();
             String makul, kode_makul, nip, dosen, kode_kelas, kelas = "";
             
             // query makul
-            ResultSet rs = st.executeQuery("SELECT * FROM makul WHERE semester LIKE '%" + 
-                            cbSemester.getSelectedItem().toString() + "%'");
+            rs = st.executeQuery("SELECT * FROM makul WHERE semester LIKE '%" + 
+                    cbSemester.getSelectedItem().toString() + "%'");
             
             while (rs.next()){
                 makul = rs.getString("makul");
@@ -273,10 +307,12 @@ public class JadwalFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Creates new form JadwalFrame
+     */
     public JadwalFrame() {
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
-        this.setLocationRelativeTo(null);
+        FrameSetting.setFrame(this);
         lebarKolom();
         JamDigital.getJam(lbl_jam);
         resetTable("");
@@ -561,7 +597,6 @@ public class JadwalFrame extends javax.swing.JFrame {
             if (kelasList.get(i).getKelas().equals(tJadwal.getValueAt(tJadwal.getSelectedRow(), 4).toString())) 
             {
                 cbKelas.setSelectedItem("("+kelasList.get(i).getKodeKelas()+") "+kelasList.get(i).getKelas());
-                System.out.println("("+kelasList.get(i).getKodeKelas()+") "+kelasList.get(i).getKelas());
             }
         }
         
@@ -586,8 +621,6 @@ public class JadwalFrame extends javax.swing.JFrame {
                 if (list.get(i).getMakul().equals(tJadwal.getValueAt(tJadwal.getSelectedRow(), 2).toString())) 
                     {
                         cbMakul.setSelectedItem("("+list.get(i).getKodeMakul()+") "+list.get(i).getMakul());
-                        System.out.println(tJadwal.getValueAt(tJadwal.getSelectedRow(), 2).toString());
-                        System.out.println(list.get(i).getMakul());
                     }                       
                 } 
             }
