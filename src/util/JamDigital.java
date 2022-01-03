@@ -26,7 +26,7 @@ public class JamDigital {
                     siang_malam = "PM";
                 }
                 else {
-                    siang_malam = "PM";
+                    siang_malam = "AM";
                 }
                 String time = jam+" : "+menit+" : "+detik+" "+siang_malam;
                 label.setText(time);

@@ -784,7 +784,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
             JasperPrint JPrint = JasperFillManager.fillReport(getClass().getResourceAsStream("../../report/mhsReport.jasper"), param, con);
             JasperViewer.viewReport(JPrint, false);
         }catch(Exception ex){
-            System.out.println(ex);
+            System.err.println("Error: " + ex.getMessage());
         }
     }//GEN-LAST:event_bCetakActionPerformed
 
