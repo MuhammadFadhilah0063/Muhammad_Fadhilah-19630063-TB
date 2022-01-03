@@ -340,6 +340,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         rbLaki = new javax.swing.JRadioButton();
         rbPerempuan = new javax.swing.JRadioButton();
+        cbProgCetak1 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         cbProgStudi = new javax.swing.JComboBox<>();
@@ -414,6 +415,11 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         rbPerempuan.setText("Perempuan");
         getContentPane().add(rbPerempuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, -1));
 
+        cbProgCetak1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        cbProgCetak1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S1 Teknik Informatika", "S1 Sistem Informasi" }));
+        cbProgCetak1.setPreferredSize(new java.awt.Dimension(64, 18));
+        getContentPane().add(cbProgCetak1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 650, 170, 30));
+
         jLabel7.setFont(new java.awt.Font("Berlin Sans FB", 0, 21)); // NOI18N
         jLabel7.setText("Prog. Studi");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 220, -1, -1));
@@ -423,7 +429,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
 
         cbProgStudi.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        cbProgStudi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S1 Teknik Informatika" }));
+        cbProgStudi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S1 Teknik Informatika", "S1 Sistem Informasi" }));
         cbProgStudi.setPreferredSize(new java.awt.Dimension(64, 18));
         getContentPane().add(cbProgStudi, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 300, 30));
         getContentPane().add(dpTglLahir, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 280, 300, -1));
@@ -778,13 +784,15 @@ public class MahasiswaFrame extends javax.swing.JFrame {
     private void bCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCetakActionPerformed
         // TODO add your handling code here:
         try{
-            con = Koneksi.getKoneksi();
             HashMap param = new HashMap();
+            //Mengambil parameter
+            param.put("prog_studi", cbProgCetak1.getSelectedItem().toString());
 
             JasperPrint JPrint = JasperFillManager.fillReport(getClass().getResourceAsStream("../../report/mhsReport.jasper"), param, con);
             JasperViewer.viewReport(JPrint, false);
         }catch(Exception ex){
-            System.err.println("Error: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error", "Pemberitahuan", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error print: " + ex.getMessage());
         }
     }//GEN-LAST:event_bCetakActionPerformed
 
@@ -837,6 +845,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
     private javax.swing.JButton bUbah;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbCari;
+    private javax.swing.JComboBox<String> cbProgCetak1;
     private javax.swing.JComboBox<String> cbProgStudi;
     private org.jdesktop.swingx.JXDatePicker dpTglLahir;
     private javax.swing.JTextField eCari;

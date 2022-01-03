@@ -257,8 +257,9 @@ public class KrsFrame extends javax.swing.JFrame {
         eKdJadwal.setText("");
         eMakul.setText("");
         eTahun.setText("");
+        eCari.setText("ketikan npm...");
+        eIdMhs.setText("ketikan npm...");
         setTahunAjar();
-        cbMhs.setSelectedIndex(0);
     }
     
     /**
@@ -331,30 +332,6 @@ public class KrsFrame extends javax.swing.JFrame {
     }
     
     /**
-     * Method untuk mengambil daftar mahasiswa dan menampilkan ke comboBoxMhs
-     */
-    public void setListComboBoxMhs() {
-        String npm, nama = null;
-        int idMhs = 0;
-        cbMhs.removeAllItems();
-        
-        try {
-            con = Koneksi.getKoneksi();
-            st = con.createStatement();
-            rs = st.executeQuery("SELECT * FROM mhs");
-            
-            while (rs.next()){
-                idMhs = rs.getInt("id_mhs");
-                npm = rs.getString("npm");
-                nama = rs.getString("nama");
-                cbMhs.addItem(idMhs + " | " + nama + " (" + npm + ")");
-            }
-        } catch (Exception e) {
-            System.err.println("Error setListComboBoxMhs(): " + e.getMessage());
-        }
-    }
-    
-    /**
      * Creates new form MakulFrame
      */
     public KrsFrame() {
@@ -366,7 +343,6 @@ public class KrsFrame extends javax.swing.JFrame {
         setTableList(); 
         setLabelDaftar();
         resetTable("");
-        setListComboBoxMhs();
     }
 
     /**
@@ -393,6 +369,7 @@ public class KrsFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         eKdJadwal = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        eIdMhs = new javax.swing.JTextField();
         eCari = new javax.swing.JTextField();
         eMakul = new javax.swing.JTextField();
         eDosen = new javax.swing.JTextField();
@@ -405,7 +382,6 @@ public class KrsFrame extends javax.swing.JFrame {
         tKrsMhs = new javax.swing.JTable();
         eNama = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        cbMhs = new javax.swing.JComboBox<>();
         bSimpan = new javax.swing.JButton();
         bHapus = new javax.swing.JButton();
         bBatal = new javax.swing.JButton();
@@ -491,6 +467,20 @@ public class KrsFrame extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Berlin Sans FB", 0, 21)); // NOI18N
         jLabel15.setText("Cari KRS Mahasiswa");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 655, -1, -1));
+
+        eIdMhs.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        eIdMhs.setForeground(new java.awt.Color(102, 102, 102));
+        eIdMhs.setText("ketikan npm...");
+        eIdMhs.setPreferredSize(new java.awt.Dimension(118, 27));
+        eIdMhs.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                eIdMhsFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                eIdMhsFocusLost(evt);
+            }
+        });
+        getContentPane().add(eIdMhs, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 655, 180, 30));
 
         eCari.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
         eCari.setForeground(new java.awt.Color(102, 102, 102));
@@ -583,11 +573,6 @@ public class KrsFrame extends javax.swing.JFrame {
         jLabel10.setText("Nama");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
 
-        cbMhs.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
-        cbMhs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5", "Semester 6", "Semester 7", "Semester 8" }));
-        cbMhs.setPreferredSize(new java.awt.Dimension(64, 18));
-        getContentPane().add(cbMhs, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 650, 300, 30));
-
         bSimpan.setBackground(new java.awt.Color(198, 210, 211));
         bSimpan.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         bSimpan.setForeground(new java.awt.Color(59, 59, 59));
@@ -642,7 +627,7 @@ public class KrsFrame extends javax.swing.JFrame {
                 bCetakActionPerformed(evt);
             }
         });
-        getContentPane().add(bCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 650, 100, 30));
+        getContentPane().add(bCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 654, 100, 30));
 
         bNpm.setBackground(new java.awt.Color(198, 210, 211));
         bNpm.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -783,16 +768,30 @@ public class KrsFrame extends javax.swing.JFrame {
 
     private void bCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCetakActionPerformed
         // TODO add your handling code here:
+        int id = 0;
+        
         try{
             con = Koneksi.getKoneksi();
-            HashMap param = new HashMap();
-            //Mengambil parameter
-            param.put("idMhs",cbMhs.getSelectedItem().toString().substring(0, 3));
-                  
-            JasperPrint JPrint = JasperFillManager.fillReport(getClass().getResourceAsStream("../../report/krsReport.jasper"), param, con);
-            JasperViewer.viewReport(JPrint, false);
+            
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT * FROM mhs WHERE npm = " + eIdMhs.getText());
+            
+            while (rs.next()) {                
+                id = rs.getInt("id_mhs");
+            }
+            
+            if (id != 0) {
+                HashMap param = new HashMap();
+                //Mengambil parameter
+                param.put("idMhs",id);
+
+                JasperPrint JPrint = JasperFillManager.fillReport(getClass().getResourceAsStream("../../report/krsReport.jasper"), param, con);
+                JasperViewer.viewReport(JPrint, false);
+            }else
+                JOptionPane.showMessageDialog(null, "Mahasiswa dengan NPM: " + eIdMhs + ", tidak ada", "Pemberitahuan", JOptionPane.ERROR_MESSAGE);
+            
         }catch(Exception ex){
-            System.out.println(ex);
+            System.out.println("Error print: " + ex.getMessage());
         }
     }//GEN-LAST:event_bCetakActionPerformed
 
@@ -832,6 +831,20 @@ public class KrsFrame extends javax.swing.JFrame {
             System.out.println("Error: " + e.getMessage());
         }
     }//GEN-LAST:event_bNpmActionPerformed
+
+    private void eIdMhsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_eIdMhsFocusGained
+        // TODO add your handling code here:
+        if (eIdMhs.getText().equals("ketikan npm...")) {
+            eIdMhs.setText("");
+        }
+    }//GEN-LAST:event_eIdMhsFocusGained
+
+    private void eIdMhsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_eIdMhsFocusLost
+        // TODO add your handling code here:
+        if (eIdMhs.getText().equals("")) {
+            eIdMhs.setText("ketikan npm...");
+        }
+    }//GEN-LAST:event_eIdMhsFocusLost
 
     /**
      * @param args the command line arguments
@@ -885,11 +898,11 @@ public class KrsFrame extends javax.swing.JFrame {
     private javax.swing.JButton bNpm;
     private javax.swing.JButton bSimpan;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbMhs;
     private javax.swing.JComboBox<String> cbSemester;
     private javax.swing.JTextField eCari;
     private javax.swing.JTextField eDosen;
     private javax.swing.JTextField eId;
+    private javax.swing.JTextField eIdMhs;
     private javax.swing.JTextField eKdJadwal;
     private javax.swing.JTextField eMakul;
     private javax.swing.JTextField eNama;
