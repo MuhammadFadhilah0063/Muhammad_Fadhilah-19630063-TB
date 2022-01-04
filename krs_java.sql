@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jan 2022 pada 02.40
+-- Waktu pembuatan: 04 Jan 2022 pada 03.06
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.1.0
 
@@ -124,7 +124,7 @@ INSERT INTO `jadwal` (`kode_jadwal`, `kode_makul`, `nip_dosen`, `kode_kelas`, `s
 ('TI05202115', 'TIUS01', '198407082010122004', 'TI2021504', 'Semester 5', '07.30-09.00', 'Selasa'),
 ('TI05202116', 'TIVG01', '198702132014041001', 'TI2021504', 'Semester 5', '13.00-14.30', 'Rabu'),
 ('TI07202101', 'TISI14', '197601161997022001', 'TI2021707', 'Semester 7', '07.30-09.00', 'Senin'),
-('TI07202201', 'TIUB01', '198407082010122004', 'TI2021707', 'Semester 7', '07.30-09.00', 'Senin');
+('TI07202201', 'TIUB01', '196002211984031001', 'TI2021707', 'Semester 7', '07.30-09.00', 'Senin');
 
 -- --------------------------------------------------------
 
@@ -192,12 +192,20 @@ INSERT INTO `krs` (`id_krs`, `id_mhs`, `kode_jadwal`, `tahun_ajar`) VALUES
 ('KS0020', 102, 'TI01202103', '2021/2022'),
 ('KS0021', 102, 'TI01202114', '2021/2022'),
 ('KS0022', 102, 'TI01202115', '2021/2022'),
-('KS0023', 129, 'TI07202201', '2022/2023'),
 ('KS0024', 129, 'TI07202101', '2022/2023'),
 ('KS0025', 105, 'TI01202102', '2022/2023'),
 ('KS0026', 105, 'TI01202103', '2022/2023'),
 ('KS0027', 105, 'TI01202104', '2022/2023'),
-('KS0028', 105, 'TI01202106', '2022/2023');
+('KS0028', 105, 'TI01202106', '2022/2023'),
+('KS0029', 129, 'TI07202201', '2022/2023'),
+('KS0030', 105, 'TI01202105', '2022/2023'),
+('KS0031', 105, 'TI01202107', '2022/2023'),
+('KS0032', 105, 'TI01202108', '2022/2023'),
+('KS0033', 105, 'TI01202109', '2022/2023'),
+('KS0034', 105, 'TI01202110', '2022/2023'),
+('KS0035', 105, 'TI01202111', '2022/2023'),
+('KS0036', 105, 'TI01202114', '2022/2023'),
+('KS0037', 105, 'TI01202115', '2022/2023');
 
 -- --------------------------------------------------------
 
@@ -266,7 +274,7 @@ CREATE TABLE `mhs` (
   `npm` varchar(20) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `j_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
-  `prog_studi` enum('S1 Teknik Informatika') NOT NULL,
+  `prog_studi` enum('S1 Teknik Informatika','S1 Sistem Informasi') NOT NULL,
   `tgl_lahir` date NOT NULL,
   `tempat_lahir` varchar(50) NOT NULL,
   `password` varchar(200) DEFAULT NULL,
@@ -391,7 +399,7 @@ ALTER TABLE `mhs`
 -- AUTO_INCREMENT untuk tabel `mhs`
 --
 ALTER TABLE `mhs`
-  MODIFY `id_mhs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id_mhs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
