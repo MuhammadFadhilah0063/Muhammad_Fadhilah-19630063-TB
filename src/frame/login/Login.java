@@ -121,7 +121,7 @@ public class Login extends javax.swing.JFrame {
 
         lbExit.setForeground(new java.awt.Color(255, 51, 255));
         lbExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbExit.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_exit_login.png")); // NOI18N
+        lbExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_exit_login.png"))); // NOI18N
         lbExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbExitMouseClicked(evt);
@@ -190,7 +190,7 @@ public class Login extends javax.swing.JFrame {
         jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 300, 10));
 
         lbLoginAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbLoginAdmin.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_login_admin.png")); // NOI18N
+        lbLoginAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_login_admin.png"))); // NOI18N
         lbLoginAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbLoginAdminMouseClicked(evt);
@@ -199,7 +199,7 @@ public class Login extends javax.swing.JFrame {
         jPanel3.add(lbLoginAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 300, 60));
 
         lbLoginMhs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbLoginMhs.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_login_mhs.png")); // NOI18N
+        lbLoginMhs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_login_mhs.png"))); // NOI18N
         lbLoginMhs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbLoginMhsMouseClicked(evt);
@@ -208,14 +208,14 @@ public class Login extends javax.swing.JFrame {
         jPanel3.add(lbLoginMhs, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 310, 60));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\login_admin.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/form/login_admin.png"))); // NOI18N
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 430, 390));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\login_mhs.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/form/login_mhs.png"))); // NOI18N
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 440, 370));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\shadow_form_login.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/form/shadow_form_login.png"))); // NOI18N
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 920, 440));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 880, 470));

@@ -171,7 +171,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\btn_exit_login.png"/>
+              <Image iconType="3" name="/asset/button/btn_exit_login.png"/>
             </Property>
           </Properties>
           <Events>
@@ -328,7 +328,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\btn_login_admin.png"/>
+              <Image iconType="3" name="/asset/button/btn_login_admin.png"/>
             </Property>
           </Properties>
           <Events>
@@ -344,7 +344,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\btn_login_mhs.png"/>
+              <Image iconType="3" name="/asset/button/btn_login_mhs.png"/>
             </Property>
           </Properties>
           <Events>
@@ -362,7 +362,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\form\login_admin.png"/>
+              <Image iconType="3" name="/asset/form/login_admin.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -374,7 +374,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\form\login_mhs.png"/>
+              <Image iconType="3" name="/asset/form/login_mhs.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -387,7 +387,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\form\shadow_form_login.png"/>
+              <Image iconType="3" name="/asset/form/shadow_form_login.png"/>
             </Property>
           </Properties>
           <Constraints>
