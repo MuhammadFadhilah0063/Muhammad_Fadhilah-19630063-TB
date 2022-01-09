@@ -369,7 +369,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bKembali.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\back.png")); // NOI18N
+        bKembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/back.png"))); // NOI18N
         bKembali.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bKembaliMouseClicked(evt);
@@ -377,7 +377,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         });
         getContentPane().add(bKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 10, 70, 90));
 
-        bLogout.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\logout.png")); // NOI18N
+        bLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/logout.png"))); // NOI18N
         bLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bLogoutMouseClicked(evt);
@@ -385,7 +385,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         });
         getContentPane().add(bLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 10, 70, 90));
 
-        bExit.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\exit.png")); // NOI18N
+        bExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/exit.png"))); // NOI18N
         bExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bExitMouseClicked(evt);
@@ -434,7 +434,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         getContentPane().add(cbProgStudi, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 220, 300, 30));
         getContentPane().add(dpTglLahir, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 280, 300, -1));
 
-        lFoto.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\img\\800px-No-Image-Placeholder.svg.png")); // NOI18N
+        lFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/img/800px-No-Image-Placeholder.svg.png"))); // NOI18N
         lFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lFoto.setPreferredSize(new java.awt.Dimension(183, 224));
         getContentPane().add(lFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 180, 190, 210));
@@ -515,7 +515,6 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         bBatal.setBackground(new java.awt.Color(198, 210, 211));
         bBatal.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         bBatal.setForeground(new java.awt.Color(59, 59, 59));
-        bBatal.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\icon_batal.png")); // NOI18N
         bBatal.setText("BATAL");
         bBatal.setToolTipText("");
         bBatal.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(171, 176, 174), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(198, 210, 211), 2)));
@@ -529,7 +528,6 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         bHapus.setBackground(new java.awt.Color(198, 210, 211));
         bHapus.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         bHapus.setForeground(new java.awt.Color(59, 59, 59));
-        bHapus.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\icon_hapus.png")); // NOI18N
         bHapus.setText("HAPUS");
         bHapus.setToolTipText("");
         bHapus.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(171, 176, 174), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(198, 210, 211), 2)));
@@ -543,7 +541,6 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         bUbah.setBackground(new java.awt.Color(198, 210, 211));
         bUbah.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         bUbah.setForeground(new java.awt.Color(59, 59, 59));
-        bUbah.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\icon_edit.png")); // NOI18N
         bUbah.setText("UBAH");
         bUbah.setToolTipText("");
         bUbah.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(171, 176, 174), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(198, 210, 211), 2)));
@@ -557,7 +554,6 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         bSimpan.setBackground(new java.awt.Color(198, 210, 211));
         bSimpan.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         bSimpan.setForeground(new java.awt.Color(59, 59, 59));
-        bSimpan.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\icon_simpan.png")); // NOI18N
         bSimpan.setText("SIMPAN");
         bSimpan.setToolTipText("");
         bSimpan.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(171, 176, 174), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(198, 210, 211), 2)));
@@ -571,7 +567,6 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         bCetak.setBackground(new java.awt.Color(198, 210, 211));
         bCetak.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         bCetak.setForeground(new java.awt.Color(59, 59, 59));
-        bCetak.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\icon_cetak.png")); // NOI18N
         bCetak.setText("Cetak");
         bCetak.setToolTipText("");
         bCetak.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(171, 176, 174), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(198, 210, 211), 2)));
@@ -587,7 +582,7 @@ public class MahasiswaFrame extends javax.swing.JFrame {
         lbl_jam.setText("Jam");
         getContentPane().add(lbl_jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\form_mhs.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/form/form_mhs.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
 
         pack();

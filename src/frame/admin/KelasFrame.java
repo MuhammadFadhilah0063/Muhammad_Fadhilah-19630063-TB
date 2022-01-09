@@ -217,7 +217,7 @@ public class KelasFrame extends javax.swing.JFrame {
         jLabel5.setText("Semester");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, -1));
 
-        bKembali.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\back.png")); // NOI18N
+        bKembali.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/back.png"))); // NOI18N
         bKembali.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bKembaliMouseClicked(evt);
@@ -225,7 +225,7 @@ public class KelasFrame extends javax.swing.JFrame {
         });
         getContentPane().add(bKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, 70, 90));
 
-        bLogout.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\logout.png")); // NOI18N
+        bLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/logout.png"))); // NOI18N
         bLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bLogoutMouseClicked(evt);
@@ -233,7 +233,7 @@ public class KelasFrame extends javax.swing.JFrame {
         });
         getContentPane().add(bLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 10, 70, 90));
 
-        bExit.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\exit.png")); // NOI18N
+        bExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/exit.png"))); // NOI18N
         bExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bExitMouseClicked(evt);
@@ -286,7 +286,6 @@ public class KelasFrame extends javax.swing.JFrame {
         bUbah.setBackground(new java.awt.Color(198, 210, 211));
         bUbah.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         bUbah.setForeground(new java.awt.Color(59, 59, 59));
-        bUbah.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\icon_edit.png")); // NOI18N
         bUbah.setText("UBAH");
         bUbah.setToolTipText("");
         bUbah.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(171, 176, 174), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(198, 210, 211), 2)));
@@ -300,7 +299,6 @@ public class KelasFrame extends javax.swing.JFrame {
         bHapus.setBackground(new java.awt.Color(198, 210, 211));
         bHapus.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         bHapus.setForeground(new java.awt.Color(59, 59, 59));
-        bHapus.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\icon_hapus.png")); // NOI18N
         bHapus.setText("HAPUS");
         bHapus.setToolTipText("");
         bHapus.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(171, 176, 174), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(198, 210, 211), 2)));
@@ -314,7 +312,6 @@ public class KelasFrame extends javax.swing.JFrame {
         bBatal.setBackground(new java.awt.Color(198, 210, 211));
         bBatal.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         bBatal.setForeground(new java.awt.Color(59, 59, 59));
-        bBatal.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\icon_batal.png")); // NOI18N
         bBatal.setText("BATAL");
         bBatal.setToolTipText("");
         bBatal.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(171, 176, 174), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(198, 210, 211), 2)));
@@ -341,7 +338,6 @@ public class KelasFrame extends javax.swing.JFrame {
         bSimpan.setBackground(new java.awt.Color(198, 210, 211));
         bSimpan.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         bSimpan.setForeground(new java.awt.Color(59, 59, 59));
-        bSimpan.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\icon_simpan.png")); // NOI18N
         bSimpan.setText("SIMPAN");
         bSimpan.setToolTipText("");
         bSimpan.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(171, 176, 174), 2, true), javax.swing.BorderFactory.createLineBorder(new java.awt.Color(198, 210, 211), 2)));
@@ -357,7 +353,7 @@ public class KelasFrame extends javax.swing.JFrame {
         lbl_jam.setText("Jam");
         getContentPane().add(lbl_jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\form_kelas.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/form/form_kelas.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         pack();

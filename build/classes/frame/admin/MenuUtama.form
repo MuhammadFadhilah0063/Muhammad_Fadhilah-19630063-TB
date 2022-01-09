@@ -45,7 +45,7 @@
         <Component class="javax.swing.JLabel" name="bKelas">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\btn_kelas.png"/>
+              <Image iconType="3" name="/asset/button/btn_kelas.png"/>
             </Property>
           </Properties>
           <Events>
@@ -60,7 +60,7 @@
         <Component class="javax.swing.JLabel" name="bJadwal">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\btn_jadwal.png"/>
+              <Image iconType="3" name="/asset/button/btn_jadwal.png"/>
             </Property>
           </Properties>
           <Events>
@@ -75,7 +75,7 @@
         <Component class="javax.swing.JLabel" name="bKrs">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\btn_krs.png"/>
+              <Image iconType="3" name="/asset/button/btn_krs.png"/>
             </Property>
           </Properties>
           <Events>
@@ -109,7 +109,7 @@
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\user.png"/>
+              <Image iconType="3" name="/asset/button/user.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -121,7 +121,7 @@
         <Component class="javax.swing.JLabel" name="bLogout">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\logout.png"/>
+              <Image iconType="3" name="/asset/button/logout.png"/>
             </Property>
           </Properties>
           <Events>
@@ -136,7 +136,7 @@
         <Component class="javax.swing.JLabel" name="bExit">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\exit.png"/>
+              <Image iconType="3" name="/asset/button/exit.png"/>
             </Property>
           </Properties>
           <Events>
@@ -151,7 +151,7 @@
         <Component class="javax.swing.JLabel" name="bMakul">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\btn_makul.png"/>
+              <Image iconType="3" name="/asset/button/btn_makul.png"/>
             </Property>
           </Properties>
           <Events>
@@ -166,7 +166,7 @@
         <Component class="javax.swing.JLabel" name="bMhs">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\btn_mhs.png"/>
+              <Image iconType="3" name="/asset/button/btn_mhs.png"/>
             </Property>
           </Properties>
           <Events>
@@ -189,7 +189,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\btn_dosen.png"/>
+              <Image iconType="3" name="/asset/button/btn_dosen.png"/>
             </Property>
           </Properties>
           <Events>
@@ -204,7 +204,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\form\form_menu_admin.png"/>
+              <Image iconType="3" name="/asset/form/form_menu_admin.png"/>
             </Property>
           </Properties>
           <Constraints>

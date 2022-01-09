@@ -29,7 +29,7 @@
     <Component class="javax.swing.JLabel" name="bKembali">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\back.png"/>
+          <Image iconType="3" name="/asset/button/back.png"/>
         </Property>
       </Properties>
       <Events>
@@ -44,7 +44,7 @@
     <Component class="javax.swing.JLabel" name="bLogout">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\logout.png"/>
+          <Image iconType="3" name="/asset/button/logout.png"/>
         </Property>
       </Properties>
       <Events>
@@ -59,7 +59,7 @@
     <Component class="javax.swing.JLabel" name="bExit">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\exit.png"/>
+          <Image iconType="3" name="/asset/button/exit.png"/>
         </Property>
       </Properties>
       <Events>
@@ -318,9 +318,6 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="3b" green="3b" red="3b" type="rgb"/>
         </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\icon_simpan.png"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="SIMPAN"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -359,9 +356,6 @@
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="3b" green="3b" red="3b" type="rgb"/>
-        </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\icon_edit.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="UBAH"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -402,9 +396,6 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="3b" green="3b" red="3b" type="rgb"/>
         </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\icon_hapus.png"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="HAPUS"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -444,9 +435,6 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="3b" green="3b" red="3b" type="rgb"/>
         </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\button\icon_batal.png"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="BATAL"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -478,7 +466,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\PBO5P\KRS_JAVA_APP\src\asset\form\form_dosen.png"/>
+          <Image iconType="3" name="/asset/form/form_dosen.png"/>
         </Property>
       </Properties>
       <Constraints>

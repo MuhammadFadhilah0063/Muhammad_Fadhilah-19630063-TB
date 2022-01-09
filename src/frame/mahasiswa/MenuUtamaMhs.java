@@ -61,7 +61,7 @@ public class MenuUtamaMhs extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bJadwal.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_jadwal.png")); // NOI18N
+        bJadwal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_jadwal.png"))); // NOI18N
         bJadwal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bJadwalMouseClicked(evt);
@@ -69,7 +69,7 @@ public class MenuUtamaMhs extends javax.swing.JFrame {
         });
         jPanel2.add(bJadwal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 280, -1));
 
-        bKrs.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_krs.png")); // NOI18N
+        bKrs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_krs.png"))); // NOI18N
         bKrs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bKrsMouseClicked(evt);
@@ -83,10 +83,10 @@ public class MenuUtamaMhs extends javax.swing.JFrame {
         lUser.setText("User");
         jPanel2.add(lUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 66, 370, 20));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\user.png")); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/user.png"))); // NOI18N
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 70, 90));
 
-        bLogout.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\logout.png")); // NOI18N
+        bLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/logout.png"))); // NOI18N
         bLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bLogoutMouseClicked(evt);
@@ -94,7 +94,7 @@ public class MenuUtamaMhs extends javax.swing.JFrame {
         });
         jPanel2.add(bLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 30, 70, 90));
 
-        bExit.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\exit.png")); // NOI18N
+        bExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/exit.png"))); // NOI18N
         bExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bExitMouseClicked(evt);
@@ -104,7 +104,7 @@ public class MenuUtamaMhs extends javax.swing.JFrame {
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 474, 280, 140));
 
         bDosen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        bDosen.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_dosen.png")); // NOI18N
+        bDosen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_dosen.png"))); // NOI18N
         bDosen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bDosenMouseClicked(evt);
@@ -112,7 +112,7 @@ public class MenuUtamaMhs extends javax.swing.JFrame {
         });
         jPanel2.add(bDosen, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 270, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\form_menu_admin.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/form/form_menu_admin.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1080, 780));

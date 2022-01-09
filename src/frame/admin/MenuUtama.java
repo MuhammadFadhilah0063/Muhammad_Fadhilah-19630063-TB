@@ -50,7 +50,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bKelas.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_kelas.png")); // NOI18N
+        bKelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_kelas.png"))); // NOI18N
         bKelas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bKelasMouseClicked(evt);
@@ -58,7 +58,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         jPanel2.add(bKelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 430, 290, 230));
 
-        bJadwal.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_jadwal.png")); // NOI18N
+        bJadwal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_jadwal.png"))); // NOI18N
         bJadwal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bJadwalMouseClicked(evt);
@@ -66,7 +66,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         jPanel2.add(bJadwal, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 430, 280, -1));
 
-        bKrs.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_krs.png")); // NOI18N
+        bKrs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_krs.png"))); // NOI18N
         bKrs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bKrsMouseClicked(evt);
@@ -80,10 +80,10 @@ public class MenuUtama extends javax.swing.JFrame {
         jLabel9.setText("Admin");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 66, 370, 20));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\user.png")); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/user.png"))); // NOI18N
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 70, 90));
 
-        bLogout.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\logout.png")); // NOI18N
+        bLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/logout.png"))); // NOI18N
         bLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bLogoutMouseClicked(evt);
@@ -91,7 +91,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         jPanel2.add(bLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 30, 70, 90));
 
-        bExit.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\exit.png")); // NOI18N
+        bExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/exit.png"))); // NOI18N
         bExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bExitMouseClicked(evt);
@@ -99,7 +99,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         jPanel2.add(bExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 30, 90, 90));
 
-        bMakul.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_makul.png")); // NOI18N
+        bMakul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_makul.png"))); // NOI18N
         bMakul.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bMakulMouseClicked(evt);
@@ -107,7 +107,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         jPanel2.add(bMakul, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 200, -1, -1));
 
-        bMhs.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_mhs.png")); // NOI18N
+        bMhs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_mhs.png"))); // NOI18N
         bMhs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bMhsMouseClicked(evt);
@@ -117,7 +117,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 474, 280, 140));
 
         bDosen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        bDosen.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\button\\btn_dosen.png")); // NOI18N
+        bDosen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/button/btn_dosen.png"))); // NOI18N
         bDosen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 bDosenMouseClicked(evt);
@@ -125,7 +125,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         jPanel2.add(bDosen, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 200, 270, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\PBO5P\\KRS_JAVA_APP\\src\\asset\\form\\form_menu_admin.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/form/form_menu_admin.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1080, 780));
